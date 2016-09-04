@@ -70,7 +70,7 @@ class HocrValidator:
                 for item in self.items:
                     filename = self.filename
                     if item.sourceline > 0:
-                        filename += ':%s' % (item.sourceline)
+                        filename += ':%d' % (item.sourceline)
                     level = item.level
                     if format == 'ansi':
                         level = "\033[3%sm%s\033[0m" % (

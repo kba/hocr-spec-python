@@ -12,7 +12,8 @@ def main(args):
         implicit_capabilities=args.implicit_capabilities)
     failed = 0
     for source in args.sources:
-        report = validator.validate(source, parse_strict=args.parse_strict)
+        report = validator.validate(
+            source, parse_strict=args.parse_strict, filename=args.filename)
         failed += not report.is_valid()
         if not args.silent:
             print(report.format(args.format))
@@ -31,6 +32,9 @@ if __name__ == "__main__":
         choices=HocrValidator.formats,
         default=HocrValidator.formats[0],
         help="Report format")
+    parser.add_argument(
+        '--filename',
+        help="Filename to use in report")
     parser.add_argument(
         '--profile',
         '-p',
