@@ -53,12 +53,13 @@ python setup.py install --user
 
     usage: hocr-spec [-h] [--format {text,bool,ansi,xml}]
                      [--profile {relaxed,standard}]
+                     [--implicit_capabilities CAPABILITY]
                      [--skip-check {attributes,classes,metadata,properties}]
                      [--parse-strict] [--silent]
                      sources [sources ...]
     
     positional arguments:
-      sources               HOCR file to check or '-' to read from STDIN
+      sources               hOCR file to check or '-' to read from STDIN
     
     optional arguments:
       -h, --help            show this help message and exit
@@ -66,8 +67,13 @@ python setup.py install --user
                             Report format
       --profile {relaxed,standard}, -p {relaxed,standard}
                             Validation profile
-      --skip-check {attributes,classes,metadata,properties}
-                            Skip this check
+      --implicit_capabilities CAPABILITY, -C CAPABILITY
+                            Enable this capability. Use '*' to enable all
+                            capabilities. In addition to the 'ocr*' classes, you
+                            can use ['ocrp_dir', 'ocrp_font', 'ocrp_lang',
+                            'ocrp_nlp', 'ocrp_poly']
+      --skip-check {attributes,classes,metadata,properties}, -X {attributes,classes,metadata,properties}
+                            Skip one check
       --parse-strict        Parse HTML with less tolerance for errors
       --silent, -s          Don't produce any output but signal success with exit
                             code.
