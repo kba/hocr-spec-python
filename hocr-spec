@@ -63,5 +63,4 @@ if __name__ == "__main__":
         action='store_true',
         help="Don't produce any output but signal success with exit code.")
     args = parser.parse_args()
-    print HocrSpec.list('profiles')
-    #  main(args)
+    main(args)
