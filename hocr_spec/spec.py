@@ -594,6 +594,12 @@ class HocrSpec:
             els = root.xpath('//*[starts-with(@class, "ocr")][@%s]' %
                              attr_spec.name)
             for el in els:
+                if '' == el.attrib[attr_spec.name]:
+                    report.add(
+                        'ERROR', el.sourceline,
+                        "%s: Attribute '%s' is empty. "
+                        "Either use 'unknown' or don't specify the attribtue"
+                        % (self.__elem_name(el), attr_spec.name))
                 for cap in attr_spec.required_capabilities:
                     self.__has_capability(report, el, cap)
 
