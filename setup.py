@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-VERSION = '0.0.5'
+VERSION = '0.0.6'
 
 import glob
 from setuptools import setup

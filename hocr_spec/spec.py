@@ -407,7 +407,7 @@ class HocrSpec:
         """
         try:
             props = self.parse_properties(el)
-        except KeyErrora as e:
+        except KeyError as e:
             report.add('ERROR', el.sourceline, '%s Cannot parse properties, missing atttribute: %s'
                     %(self.__elem_name(el), e))
             return
