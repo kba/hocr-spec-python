@@ -1,10 +1,17 @@
 # -*- coding: utf-8 -*-
 
+from future import standard_library
+standard_library.install_aliases()
+
+from builtins import str
+from builtins import map
+from builtins import object
+
 import re
 
-class HocrSpecProperties:
+class HocrSpecProperties(object):
 
-    class HocrSpecProperty:
+    class HocrSpecProperty(object):
         """
         Definition of a 'title' property
 
@@ -94,9 +101,9 @@ class HocrSpecProperties:
     x_confs = HocrSpecProperty('x_confs', float, list=True, range=[0, 100])
     x_wconf = HocrSpecProperty('x_wconf', float, range=[0, 100])
 
-class HocrSpecAttributes:
+class HocrSpecAttributes(object):
 
-    class HocrSpecAttribute:
+    class HocrSpecAttribute(object):
         """
         HTML Attributes that have special meaning in hOCR.
 
@@ -110,9 +117,9 @@ class HocrSpecAttributes:
     attr_lang = HocrSpecAttribute('lang', required_capabilities=['ocrp_lang'])
     attr_dir = HocrSpecAttribute('dir', required_capabilities=['ocrp_dir'])
 
-class HocrSpecCapabilities:
+class HocrSpecCapabilities(object):
 
-    class HocrSpecCapability:
+    class HocrSpecCapability(object):
         """
         Definition of hOCR capabilities.
         """
@@ -125,9 +132,9 @@ class HocrSpecCapabilities:
     ocrp_font = HocrSpecCapability('ocrp_font')
     ocrp_nlp = HocrSpecCapability('ocrp_nlp')
 
-class HocrSpecMetadataFields:
+class HocrSpecMetadataFields(object):
 
-    class HocrSpecMetadataField:
+    class HocrSpecMetadataField(object):
         """
         Definition of hOCR metadata.
         """
@@ -148,9 +155,9 @@ class HocrSpecMetadataFields:
     ocr_scripts = HocrSpecMetadataField('ocr-scripts', recommended=True)
 
 
-class HocrSpecClasses:
+class HocrSpecClasses(object):
 
-    class HocrSpecClass:
+    class HocrSpecClass(object):
         """
         Definition of an element defined by its 'class' name
 
@@ -276,7 +283,7 @@ class HocrSpecClasses:
     # 7 Character Information
     ocr_cinfo = HocrSpecClass('ocr_cinfo', not_checked=True)
 
-class HocrSpecProfile:
+class HocrSpecProfile(object):
     """
     Restricts how the spec is checked.
 
@@ -295,7 +302,7 @@ class HocrSpecProfile:
         self.implicit_capabilities = implicit_capabilities
         self.skip_check = skip_check
 
-class HocrSpec:
+class HocrSpec(object):
     """
     The constraints of the HOCR HTML application profile.
 
@@ -506,7 +513,7 @@ class HocrSpec:
     @classmethod
     def list(cls, category):
         if category == 'profiles':
-            return cls.profiles.keys()
+            return list(cls.profiles.keys())
         elif category == 'checks':
             return [k[len('check_'):] for k in dir(cls)]
         elif category == 'capabilities':
@@ -539,13 +546,11 @@ class HocrSpec:
                 # property's 'split_pattern' and apply the type to its values
                 if prop_spec.list:
                     if 1 == len(prop_spec.split_pattern):
-                        v = map(prop_spec.type,
-                                re.split(prop_spec.split_pattern[0], v))
+                        v = list(map(prop_spec.type,
+                                     re.split(prop_spec.split_pattern[0], v)))
                     elif 2 == len(prop_spec.split_pattern):
                         #  lambda vv: map(prop_spec.type, re.split(prop_spec.split_pattern[1], vv)),
-                        v = map(
-                            lambda vv: map(prop_spec.type, re.split(prop_spec.split_pattern[1], vv)),
-                            re.split(prop_spec.split_pattern[0], v))
+                        v = [list(map(prop_spec.type, re.split(prop_spec.split_pattern[1], vv))) for vv in re.split(prop_spec.split_pattern[0], v)]
                 # If the property is a scalar value, apply the type to the value
                 else:
                     v = prop_spec.type(v)
