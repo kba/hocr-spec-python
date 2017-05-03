@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
+
+from future import standard_library
+standard_library.install_aliases()
+
+from builtins import object
+
 import sys
 import re
 from lxml import etree
 from functools import wraps
 from .spec import HocrSpec
 
-class HocrValidator:
+class HocrValidator(object):
 
-    class LevelAnsiColor:
+    class LevelAnsiColor(object):
         OK    = '2'
         DEBUG = '4'
         WARN  = '3'
