@@ -34,7 +34,7 @@ class HocrSpecProperties:
                      required_properties=None,
                      range=None,
                      required_capabilities=[],
-                     split_pattern=["\s+"],
+                     split_pattern=[r"\s+"],
                      list=False):
             self.name = name
             self.type = type
@@ -76,7 +76,7 @@ class HocrSpecProperties:
         'cuts',
         int,
         list=True,
-        split_pattern=['\s+', ','],
+        split_pattern=[r'\s+', ','],
         required_properties=['bbox'])
     nlp = HocrSpecProperty(
         'nlp',
@@ -345,7 +345,7 @@ class HocrSpec:
         """
         try:
             caps = root.xpath('//meta[@name="ocr-capabilities"]/@content')[0]
-            return re.split('\s+', caps)
+            return re.split(r'\s+', caps)
         except IndexError as e: return []
 
     def __has_capability(self, report, el, cap):
@@ -510,7 +510,7 @@ class HocrSpec:
         elif category == 'checks':
             return [k[len('check_'):] for k in dir(cls)]
         elif category == 'capabilities':
-            return [k for k in dir(HocrSpecCapabilities) if re.match('^[a-z].*', k)]
+            return [k for k in dir(HocrSpecCapabilities) if re.match(r'^[a-z].*', k)]
         else:
             raise ValueError("Unknown category %s" % category)
 
@@ -529,9 +529,9 @@ class HocrSpec:
         if hasattr(title, 'attrib'):
             title = title.attrib['title']
         # Split on semicolon, optionally preceded and followed by whitespace
-        for kv in re.split('\s*;\s*', title):
+        for kv in re.split(r'\s*;\s*', title):
             # Split key and value at first whitespace
-            (k, v) = re.split('\s+', kv, 1)
+            (k, v) = re.split(r'\s+', kv, 1)
             # Make sure the property is from the list of known properties
             try:
                 prop_spec = getattr(HocrSpecProperties, k)
