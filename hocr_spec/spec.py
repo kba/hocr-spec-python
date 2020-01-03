@@ -479,7 +479,7 @@ class HocrSpec(object):
         # primitives
         if not prop_spec.list:
             if prop_spec.range:
-                if not prop_spec.range[0] < v < prop_spec.range[1]:
+                if not prop_spec.range[0] <= v <= prop_spec.range[1]:
                     report.add(
                         'ERROR',
                         el.sourceline,
@@ -490,7 +490,7 @@ class HocrSpec(object):
         if prop_spec.range:
             for i, vv in enumerate(v):
                 if 1 == len(prop_spec.split_pattern):
-                    if not prop_spec.range[0] < vv < prop_spec.range[1]:
+                    if not prop_spec.range[0] <= vv <= prop_spec.range[1]:
                         report.add(
                             'ERROR',
                             el.sourceline,
@@ -498,7 +498,7 @@ class HocrSpec(object):
                             % (prop_str, i, vv, prop_spec.range))
                 if 2 == len(prop_spec.split_pattern):
                     for ii, vv in enumerate(v):
-                        if not prop_spec.range[0] < vv < prop_spec.range[1]:
+                        if not prop_spec.range[0] <= vv <= prop_spec.range[1]:
                             report.add(
                                 'ERROR',
                                 el.sourceline,
