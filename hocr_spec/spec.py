@@ -6,6 +6,7 @@ from builtins import object
 
 import re
 
+
 class HocrSpecProperties(object):
 
     class HocrSpecProperty(object):
@@ -50,6 +51,7 @@ class HocrSpecProperties(object):
             self.range = range
             self.split_pattern = split_pattern
             self.list = list
+
         def __repr__(self):
             return '<* title="%s">' % self.name
 
@@ -98,6 +100,7 @@ class HocrSpecProperties(object):
     x_confs = HocrSpecProperty('x_confs', float, list=True, range=[0, 100])
     x_wconf = HocrSpecProperty('x_wconf', float, range=[0, 100])
 
+
 class HocrSpecAttributes(object):
 
     class HocrSpecAttribute(object):
@@ -114,6 +117,7 @@ class HocrSpecAttributes(object):
     attr_lang = HocrSpecAttribute('lang', required_capabilities=['ocrp_lang'])
     attr_dir = HocrSpecAttribute('dir', required_capabilities=['ocrp_dir'])
 
+
 class HocrSpecCapabilities(object):
 
     class HocrSpecCapability(object):
@@ -128,6 +132,7 @@ class HocrSpecCapabilities(object):
     ocrp_poly = HocrSpecCapability('ocrp_poly')
     ocrp_font = HocrSpecCapability('ocrp_font')
     ocrp_nlp = HocrSpecCapability('ocrp_nlp')
+
 
 class HocrSpecMetadataFields(object):
 
@@ -209,6 +214,7 @@ class HocrSpecClasses(object):
             self.required_capabilities = [self.name] + required_capabilities
             self.one_ancestor = one_ancestor
             self.allowed_descendants = allowed_descendants
+
         def __repr__(self):
             return '<* class="%s">' % self.name
 
@@ -280,6 +286,7 @@ class HocrSpecClasses(object):
     # 7 Character Information
     ocr_cinfo = HocrSpecClass('ocr_cinfo', not_checked=True)
 
+
 class HocrSpecProfile(object):
     """
     Restricts how the spec is checked.
@@ -298,6 +305,7 @@ class HocrSpecProfile(object):
         self.description = description
         self.implicit_capabilities = implicit_capabilities
         self.skip_check = skip_check
+
 
 class HocrSpec(object):
     """

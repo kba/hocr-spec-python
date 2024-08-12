@@ -50,6 +50,7 @@ parser.add_argument(
     action='store_true',
     help="Don't produce any output but signal success with exit code.")
 
+
 def main():
     args = parser.parse_args()
 

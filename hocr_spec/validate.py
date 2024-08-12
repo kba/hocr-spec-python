@@ -6,6 +6,7 @@ import sys
 from lxml import etree
 from .spec import HocrSpec
 
+
 class HocrValidator(object):
 
     class LevelAnsiColor(object):
@@ -24,6 +25,7 @@ class HocrValidator(object):
             self.level = level
             self.sourceline = sourceline
             self.message = message
+
         def __str__(self):
             return "[%s] +%s : %s" % (self.level, self.sourceline, self.message)
 
