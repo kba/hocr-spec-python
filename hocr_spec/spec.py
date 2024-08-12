@@ -59,7 +59,7 @@ class HocrSpecProperties(object):
     bbox = HocrSpecProperty('bbox', int, list=True)
     textangle = HocrSpecProperty('textangle', float)
     poly = HocrSpecProperty('poly', int, list=True,
-            required_capabilities=['ocrp_poly'])
+                            required_capabilities=['ocrp_poly'])
     order = HocrSpecProperty('order', int)
     presence = HocrSpecProperty('presence', str)
     cflow = HocrSpecProperty('cflow', str)
@@ -300,7 +300,7 @@ class HocrSpecProfile(object):
     """
 
     def __init__(self, version='1.1', description=None,
-            implicit_capabilities=[], skip_check=[]):
+                 implicit_capabilities=[], skip_check=[]):
         self.version = version
         self.description = description
         self.implicit_capabilities = implicit_capabilities
@@ -368,9 +368,9 @@ class HocrSpec(object):
             return True
         if not cap in self.__get_capabilities(el) + self.profile.implicit_capabilities:
             report.add('ERROR',
-                    el.sourceline,
-                    '%s: Requires the "%s" capability but it is not specified'
-                    % (self.__elem_name(el), cap))
+                       el.sourceline,
+                       '%s: Requires the "%s" capability but it is not specified'
+                       % (self.__elem_name(el), cap))
 
     def __not_contains_class(self, report, el, contains_classes):
         """
@@ -380,8 +380,8 @@ class HocrSpec(object):
             contained = el.xpath(".//*[@class='%s']" % contains_class)
             if len(contained) > 0:
                 report.add('ERROR', el.sourceline,
-                        "%s must not contain '%s', but does contain %s in line %d" %
-                        (self.__elem_name(el),
+                           "%s must not contain '%s', but does contain %s in line %d" %
+                           (self.__elem_name(el),
                             contains_class,
                             self.__elem_name(contained[0]),
                             contained[0].sourceline))
@@ -393,8 +393,8 @@ class HocrSpec(object):
         nr = len(el.xpath("./ancestor::*[@class='%s']" % ancestor_class))
         if 1 != nr:
             report.add('ERROR', el.sourceline,
-                    "%s must be descendant of exactly one '%s', but found %d" %
-                    (self.__elem_name(el), ancestor_class, nr))
+                       "%s must be descendant of exactly one '%s', but found %d" %
+                       (self.__elem_name(el), ancestor_class, nr))
 
     def __has_tagname(self, report, el, tagnames):
         """
@@ -411,7 +411,7 @@ class HocrSpec(object):
         """
         if not attrib in el.attrib:
             report.add('ERROR', el.sourceline, "%s must have attribute '%s'"
-                    %(self.__elem_name(el), attrib))
+                       % (self.__elem_name(el), attrib))
 
     def __has_property(self, report, el, prop):
         """
@@ -420,16 +420,19 @@ class HocrSpec(object):
         try:
             props = self.parse_properties(el)
         except KeyError as e:
-            report.add('ERROR', el.sourceline, '%s Cannot parse properties, missing atttribute: %s'
-                    %(self.__elem_name(el), e))
+            report.add('ERROR', el.sourceline,
+                       '%s Cannot parse properties, missing atttribute: %s'
+                       % (self.__elem_name(el), e))
             return
         except Exception as e:
-            report.add('ERROR', el.sourceline, 'Error parsing properties for "%s" : %s'
-                    %(self.__elem_name(el), e))
+            report.add('ERROR', el.sourceline,
+                       'Error parsing properties for "%s" : %s'
+                       % (self.__elem_name(el), e))
             return
         if not prop in props:
-            report.add('ERROR', el.sourceline, "Element %s must have title prop '%s'"
-                    %(self.__elem_name(el), prop))
+            report.add('ERROR', el.sourceline,
+                       "Element %s must have title prop '%s'"
+                       % (self.__elem_name(el), prop))
 
     def __check_version(self, report, el, spec):
         if spec.deprecated and self.profile.version >= spec.deprecated[0]:
@@ -624,8 +627,8 @@ class HocrSpec(object):
                 report.add('ERROR', el.sourceline, "%s Unknown metadata field '%s'"
                            % (self.__elem_name(el), name))
         for field_spec in [getattr(HocrSpecMetadataFields, k)
-                     for k in dir(HocrSpecMetadataFields)
-                     if k.startswith('ocr')]:
+                           for k in dir(HocrSpecMetadataFields)
+                           if k.startswith('ocr')]:
             els = root.xpath("//meta[@name='%s']" % field_spec.name)
             # Cardinality checks
             if len(els) > 1:
@@ -644,8 +647,8 @@ class HocrSpec(object):
             try:
                 content = el.attrib['content']
             except KeyError as e:
-                report.add('ERROR', el.sourceline, "%s must have 'content' attribute"
-                        % self.__elem_name(el))
+                report.add('ERROR', el.sourceline,
+                           "%s must have 'content' attribute" % self.__elem_name(el))
                 return
             if HocrSpecMetadataFields.ocr_system == field_spec:
                 if not content in field_spec.known:

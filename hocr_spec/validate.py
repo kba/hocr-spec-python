@@ -90,7 +90,7 @@ class HocrValidator(object):
                             '\t\t<sourceline>%s</sourceline>\n'
                             '\t\t<message>%s</message>\n'
                             '\t</item>' % (item.level, item.sourceline,
-                                self.__escape_xml(item.message)))
+                                           self.__escape_xml(item.message)))
                 return '<report filename="%s" valid="%s">\n%s\n</report>' % (
                         self.filename,
                         ('true' if self.is_valid() else 'false'),
