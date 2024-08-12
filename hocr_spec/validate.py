@@ -6,9 +6,7 @@ standard_library.install_aliases()
 from builtins import object
 
 import sys
-import re
 from lxml import etree
-from functools import wraps
 from .spec import HocrSpec
 
 class HocrValidator(object):
