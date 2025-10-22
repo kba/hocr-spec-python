@@ -30,7 +30,7 @@ class HocrSpecProperties(object):
                 that must be enabled for the document in order to use this
                 property.
             split_pattern (List[str]): List of regexes to split list values.
-                Specify mutiple regexes for multi-dimensional. Default: ['\s+']
+                Specify multiple regexes for multi-dimensional. Default: ['\s+']
             range (Optional[List[int]]): Minimum and maximum value of property
         """
 
@@ -170,7 +170,7 @@ class HocrSpecClasses(object):
             not_checked (bool): Whether the validation is not currently tested in-depth
             tagnames (List[str]): Tag names elements with this class
                 may have.
-            must_exist (bool): Whether at least one elment of this class must
+            must_exist (bool): Whether at least one element of this class must
                 be present in document
             must_not_contain (List[str]): Classes of elements that must not be
                 descendants of this element
@@ -289,7 +289,7 @@ class HocrSpecProfile(object):
 
     Args:
         version (str): Version to check against
-        description (str): Descibe the profile
+        description (str): Describe the profile
         implicit_capabilities (List[str]): Assume these capabilities were
             specified in <meta name=ocr-capabilities'>
         skip_check (List[str]): Specify a list of checks to skip.
@@ -415,7 +415,7 @@ class HocrSpec(object):
         try:
             props = self.parse_properties(el)
         except KeyError as e:
-            report.add('ERROR', el.sourceline, '%s Cannot parse properties, missing atttribute: %s'
+            report.add('ERROR', el.sourceline, '%s Cannot parse properties, missing attribute: %s'
                     %(self.__elem_name(el), e))
             return
         except Exception as e:
@@ -603,7 +603,7 @@ class HocrSpec(object):
                     report.add(
                         'ERROR', el.sourceline,
                         "%s: Attribute '%s' is empty. "
-                        "Either use 'unknown' or don't specify the attribtue"
+                        "Either use 'unknown' or don't specify the attribute"
                         % (self.__elem_name(el), attr_spec.name))
                 for cap in attr_spec.required_capabilities:
                     self.__has_capability(report, el, cap)
