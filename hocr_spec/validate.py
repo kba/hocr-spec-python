@@ -1,15 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from future import standard_library
-standard_library.install_aliases()
-
 from builtins import object
 
 import sys
-import re
 from lxml import etree
-from functools import wraps
 from .spec import HocrSpec
+
 
 class HocrValidator(object):
 
@@ -29,6 +25,7 @@ class HocrValidator(object):
             self.level = level
             self.sourceline = sourceline
             self.message = message
+
         def __str__(self):
             return "[%s] +%s : %s" % (self.level, self.sourceline, self.message)
 
@@ -93,7 +90,7 @@ class HocrValidator(object):
                             '\t\t<sourceline>%s</sourceline>\n'
                             '\t\t<message>%s</message>\n'
                             '\t</item>' % (item.level, item.sourceline,
-                                self.__escape_xml(item.message)))
+                                           self.__escape_xml(item.message)))
                 return '<report filename="%s" valid="%s">\n%s\n</report>' % (
                         self.filename,
                         ('true' if self.is_valid() else 'false'),
