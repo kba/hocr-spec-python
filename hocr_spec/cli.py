@@ -1,10 +1,5 @@
 #!/usr/bin/env python
 
-from __future__ import print_function
-
-from future import standard_library
-standard_library.install_aliases()
-
 import sys
 from hocr_spec import HocrValidator, HocrSpec
 from argparse import ArgumentParser
@@ -54,6 +49,7 @@ parser.add_argument(
     '-s',
     action='store_true',
     help="Don't produce any output but signal success with exit code.")
+
 
 def main():
     args = parser.parse_args()
