@@ -17,7 +17,7 @@ Fixed:
 Changed:
 
   * Python 3 compatible, Proper installation, #2
-  * Added `--filename` option to specifiy report filename
+  * Added `--filename` option to specify report filename
 
 ## [0.0.5] - 2016-09-05
 
