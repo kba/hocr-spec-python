@@ -53,7 +53,7 @@ class HocrValidator(object):
 
         def add(self, level, *args, **kwargs):
             self.items.append(HocrValidator.ReportItem(level, *args, **kwargs))
-            if level is 'FATAL':
+            if level == 'FATAL':
                 raise ValueError("Validation hit a FATAL issue: %s" % self.items[-1])
 
         def is_valid(self):
